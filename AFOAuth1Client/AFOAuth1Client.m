@@ -178,6 +178,10 @@ NSDictionary * AFParametersFromQueryString(NSString *queryString) {
 }
 
 - (id)initWithKey:(NSString *)key secret:(NSString *)secret {
+    return [self initWithKey:key secret:secret verifier:nil];
+}
+
+- (id)initWithKey:(NSString *)key secret:(NSString *)secret verifier:(NSString *)verifier {
     self = [super init];
     if (!self) {
         return nil;
@@ -185,6 +189,7 @@ NSDictionary * AFParametersFromQueryString(NSString *queryString) {
     
     self.key = key;
     self.secret = secret;
+    self.verifier = verifier;
     
     return self;
 }
