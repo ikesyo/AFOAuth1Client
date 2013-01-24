@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/AFNetworking/AFOAuth1Client"
   s.license      = 'MIT'
   s.author       = { 'Mattt Thompson' => 'm@mattt.me' }
-  s.source       = { :git => "https://github.com/AFNetworking/AFOAuth1Client.git", :tag => '0.1.0' }
+  s.source       = { :git => "https://github.com/ikesyo/AFOAuth1Client.git", :branch => 'add-some-extendability' }
   s.source_files = 'AFOAuth1Client'
   s.requires_arc = true
 
