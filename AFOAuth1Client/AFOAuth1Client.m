@@ -107,7 +107,7 @@ static inline NSString * AFHMACSHA1Signature(NSURLRequest *request, NSString *co
     return AFEncodeBase64WithData([NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH]);
 }
 
-#pragma mark - Public function
+#pragma mark - Public Functions
 
 NSDictionary * AFParametersFromQueryString(NSString *queryString) {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
