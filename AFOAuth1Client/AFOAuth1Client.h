@@ -34,6 +34,20 @@ typedef enum {
 @interface AFOAuth1Client : AFHTTPClient
 
 ///-----------------------------------
+/// @name Parameters that will be used
+///-----------------------------------
+
+/**
+ 
+ */
+@property (readonly, nonatomic, copy) NSString *key;
+
+/**
+ 
+ */
+@property (readonly, nonatomic, copy) NSString *secret;
+
+///-----------------------------------
 /// @name Managing OAuth Configuration
 ///-----------------------------------
 
