@@ -68,31 +68,6 @@ static NSString * AFPercentEscapedQueryStringPairMemberFromStringWithEncoding(NS
 	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescaped, (__bridge CFStringRef)kAFCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
-static NSDictionary * AFParametersFromQueryString(NSString *queryString) {
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    if (queryString) {
-        NSScanner *parameterScanner = [[NSScanner alloc] initWithString:queryString];
-        NSString *name = nil;
-        NSString *value = nil;
-        
-        while (![parameterScanner isAtEnd]) {
-            name = nil;        
-            [parameterScanner scanUpToString:@"=" intoString:&name];
-            [parameterScanner scanString:@"=" intoString:NULL];
-            
-            value = nil;
-            [parameterScanner scanUpToString:@"&" intoString:&value];
-            [parameterScanner scanString:@"&" intoString:NULL];		
-            
-            if (name && value) {
-                [parameters setValue:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:[name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            }
-        }
-    }
-    
-    return parameters;
-}
-
 static inline BOOL AFQueryStringValueIsTrue(NSString *value) {
     return value && [[value lowercaseString] hasPrefix:@"t"];
 }
@@ -130,6 +105,33 @@ static inline NSString * AFHMACSHA1Signature(NSURLRequest *request, NSString *co
     CCHmacFinal(&cx, digest);
     
     return AFEncodeBase64WithData([NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH]);
+}
+
+#pragma mark - Public function
+
+NSDictionary * AFParametersFromQueryString(NSString *queryString) {
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (queryString) {
+        NSScanner *parameterScanner = [[NSScanner alloc] initWithString:queryString];
+        NSString *name = nil;
+        NSString *value = nil;
+        
+        while (![parameterScanner isAtEnd]) {
+            name = nil;
+            [parameterScanner scanUpToString:@"=" intoString:&name];
+            [parameterScanner scanString:@"=" intoString:NULL];
+            
+            value = nil;
+            [parameterScanner scanUpToString:@"&" intoString:&value];
+            [parameterScanner scanString:@"&" intoString:NULL];
+            
+            if (name && value) {
+                [parameters setValue:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:[name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+        }
+    }
+    
+    return parameters;
 }
 
 #pragma mark -

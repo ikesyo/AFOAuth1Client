@@ -22,6 +22,8 @@
 
 #import "AFHTTPClient.h"
 
+extern NSDictionary * AFParametersFromQueryString(NSString *queryString);
+
 typedef enum {
     AFHMACSHA1SignatureMethod = 1,
 } AFOAuthSignatureMethod;
