@@ -175,6 +175,18 @@ static inline NSString * AFHMACSHA1Signature(NSURLRequest *request, NSString *co
     return self;
 }
 
+- (id)initWithKey:(NSString *)key secret:(NSString *)secret {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.key = key;
+    self.secret = secret;
+    
+    return self;
+}
+
 @end
 
 #pragma mark -

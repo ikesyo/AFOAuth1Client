@@ -160,4 +160,9 @@ extern NSString * const kAFApplicationLaunchOptionsURLKey;
  */
 - (id)initWithQueryString:(NSString *)queryString;
 
+/**
+ 
+ */
+- (id)initWithKey:(NSString *)key secret:(NSString *)secret;
+
 @end
