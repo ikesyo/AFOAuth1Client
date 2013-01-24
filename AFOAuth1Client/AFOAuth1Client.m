@@ -61,13 +61,6 @@ static NSString * AFEncodeBase64WithData(NSData *data) {
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }
 
-static NSString * AFPercentEscapedQueryStringPairMemberFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
-    static NSString * const kAFCharactersToBeEscaped = @":/?&=;+!@#$()~";
-    static NSString * const kAFCharactersToLeaveUnescaped = @"[].";
-    
-	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescaped, (__bridge CFStringRef)kAFCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding));
-}
-
 static inline BOOL AFQueryStringValueIsTrue(NSString *value) {
     return value && [[value lowercaseString] hasPrefix:@"t"];
 }
